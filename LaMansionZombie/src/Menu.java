@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public int dificultad() {
+    public int elegirDificultad() {
         Scanner sc = new Scanner(System.in);
         int op;
 
@@ -18,10 +18,9 @@ public class Menu {
         return op;
     }
 
-    public int accion() {
-        Scanner sc  = new Scanner(System.in);
-        int op = 0;
+    public void accion() {
 
-        return op;
     }
+
+
 }

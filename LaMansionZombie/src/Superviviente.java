@@ -29,4 +29,16 @@ public class Superviviente extends Personaje {
     public void setBotiquin(boolean botiquin) {
         this.botiquin = botiquin;
     }
+
+    public boolean tieneBotiquin() {
+        return botiquin;
+    }
+
+    public void sumaProteccion() {
+        protecciones++;
+    }
+
+    public void sumaArma() {
+        armas++;
+    }
 }
