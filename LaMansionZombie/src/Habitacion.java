@@ -6,8 +6,8 @@ public class Habitacion {
     private int numHabitacion;
     private int intentosBusqueda;
     private int numZombies;
-    private Zombie ayusoAsesina;
-    private Superviviente sanchezLadron;
+    private final Zombie zombie;
+    private final Superviviente superviviente;
 
 
     public Habitacion(int dificultad) {
@@ -15,8 +15,8 @@ public class Habitacion {
         this.numHabitacion = 1;
         this.intentosBusqueda = 3;
         this.numZombies = 1;
-        this.ayusoAsesina = nuevoZombie();
-        this.sanchezLadron = new Superviviente();
+        this.zombie = nuevoZombie();
+        this.superviviente = new Superviviente();
     }
 
     private Zombie nuevoZombie() {
@@ -42,22 +42,22 @@ public class Habitacion {
 
         } else if (result <= 90) {
 
-            if (sanchezLadron.tieneBotiquin()) {
+            if (superviviente.tieneBotiquin()) {
                 System.out.println("Ya tienes un botiquín.");
             } else {
                 System.out.println("Has encontrado un botiquín.");
-                sanchezLadron.setBotiquin(true);
+                superviviente.setBotiquin(true);
             }
 
         } else if (result <= 95) {
 
             System.out.println("Has encontrado una protección.");
-            sanchezLadron.sumaProteccion();
+            superviviente.sumaProteccion();
 
         } else {
 
             System.out.println("Has encontrado un arma.");
-            sanchezLadron.sumaArma();
+            superviviente.sumaArma();
         }
 
     }
@@ -73,19 +73,19 @@ public class Habitacion {
 
         int turno = 1;
 
-        while(ayusoAsesina.getPtsVida() > 0 || sanchezLadron.getPtsVida() > 0) {
+        while(zombie.getPtsVida() > 0 || superviviente.getPtsVida() > 0) {
 
-            int ataqueJugador = sanchezLadron.getPtsAtaque();
-            int ataqueZombie = ayusoAsesina.getPtsAtaque();
+            int ataqueJugador = superviviente.getPtsAtaque();
+            int ataqueZombie = zombie.getPtsAtaque();
 
             System.out.println("<<TURNO " + turno + ">>");
 
-            ayusoAsesina.setPtsVida(ayusoAsesina.getPtsVida() - ataqueJugador);
+            zombie.setPtsVida(zombie.getPtsVida() - ataqueJugador);
             System.out.println("El zombie recibe " + ataqueJugador + " puntos de daño.");
 
-            if (ayusoAsesina.getPtsVida() > 0) {
+            if (zombie.getPtsVida() > 0) {
 
-                sanchezLadron.setPtsVida(sanchezLadron.getPtsVida() - ataqueZombie);
+                superviviente.setPtsVida(superviviente.getPtsVida() - ataqueZombie);
                 System.out.println("Recibes " + ataqueZombie + " puntos de daño.");
                 turno++;
 
@@ -94,13 +94,13 @@ public class Habitacion {
                 numZombies--;
             }
 
-            if (sanchezLadron.getPtsVida() <= 0) {
+            if (superviviente.getPtsVida() <= 0) {
                 System.out.println("GAME OVER.");
             }
         }
     }
 
-    public void avanzarHabitacion(int dificultad) {
+    public void avanzarHabitacion() {
 
         numHabitacion++;
         intentosBusqueda = 3;
@@ -108,6 +108,30 @@ public class Habitacion {
     }
 
     public void curarse() {
-        sanchezLadron.curar();
+        superviviente.curar();
+    }
+
+    public int getNumZombies() {
+        return numZombies;
+    }
+
+    public Superviviente getSuperviviente() {
+        return superviviente;
+    }
+
+    public Zombie getZombie() {
+        return zombie;
+    }
+
+    public int getIntentosBusqueda() {
+        return intentosBusqueda;
+    }
+
+    public int getNumHabitacion() {
+        return numHabitacion;
+    }
+
+    public int getMaxHabitaciones() {
+        return maxHabitaciones;
     }
 }
