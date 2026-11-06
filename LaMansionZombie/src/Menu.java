@@ -23,8 +23,6 @@ public class Menu {
 
     public void accion() {
 
-        
-
     }
 
     public void llamaCombate() {
